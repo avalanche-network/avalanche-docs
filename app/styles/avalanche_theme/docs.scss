@@ -1,0 +1,137 @@
+/*
+ * Base structure
+ */
+
+/*
+ * Global add-ons
+ */
+
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+/*
+ * Top navigation
+ * Hide default border to remove 1px line.
+ */
+.navbar-fixed-top {
+  border: 0;
+}
+
+/*
+ * Sidebar
+ */
+
+/* Hide for mobile, show later */
+.sidebar {
+  display: none;
+}
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #f5f5f5;
+  }
+}
+
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.sidebar-main > .nav-sidebar > .active > a,
+.sidebar-main > .nav-sidebar > .active > a:hover,
+.sidebar-main > .nav-sidebar > .active > a:focus {
+  color: #fff;
+  background-color: #3C3F47;
+  text-decoration: none;
+}
+
+.sidebar-secondary > .nav-sidebar > .active > a,
+.sidebar-secondary > .nav-sidebar > .active > a:hover,
+.sidebar-secondary > .nav-sidebar > .active > a:focus {
+  color: #3C3F47;
+  background-color: #E8E8E8;
+  text-decoration: none;
+}
+
+.sidebar-main {
+  background-color: #5D5B74;
+  a {
+    color: #F5F5F5;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+  a:hover {
+    background-color: #3C3F47;
+    text-decoration: none;
+  }
+}
+
+.sidebar-secondary {
+  background-color: #F5F5F5;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  a {
+    color: #3C3F47;
+    margin: 0;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    text-decoration: none;
+  }
+  a:hover {
+    background-color: #E8E8E8;
+    text-decoration: none;
+  }
+}
+
+.sidebar h1 {
+  color: #F5F5F5;
+}
+
+/*
+ * Main content
+ */
+
+.main {
+  padding: 20px;
+}
+@media (min-width: 768px) {
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+.main .page-header {
+  margin-top: 0;
+}
+
+
+// Hacks
+
+.api-endpoint > .label { margin-right: 6px;}
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-track {
+
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #AFB4BF;
+}

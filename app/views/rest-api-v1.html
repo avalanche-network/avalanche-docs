@@ -1,0 +1,105 @@
+<div class="container-fluid" >
+  <div class="row">
+    <div class="col-sm-3 col-md-2 sidebar sidebar-main">
+      <h1>docs</h1>
+      <ul class="nav nav-sidebar">
+        <li><a ui-sref="getting-started">Getting Started</a></li>
+        <li><a ui-sref="rulebook.intro">Rulebook</a></li>
+        <li><a ui-sref="styleguide">Styleguide</a></li>
+        <li class="active"><a ui-sref="rest-api-v1.get-missions">Restfull API v1 <span class="sr-only">(current)</span></a></li>
+        <li><a ui-sref="realtime-api-v1">Realtime API v1</a></li>
+      </ul>
+    </div>
+    <div class="col-sm-4 col-md-3 col-md-offset-2 col-sm-offset-3 sidebar sidebar-secondary">
+      <ul class="nav nav-sidebar">
+        <li ng-class="{ active: isActive('/rest-api-v1/get-missions')}">
+          <a ui-sref="rest-api-v1.get-missions">
+            <small class="api-endpoint"><span class="label label-success">GET</span><samp>/missions/</samp></small>
+            <p class="endpoint-description"><i>Mission list</i></p>
+          </a>
+        </li>
+        <li ng-class="{ active: isActive('/rest-api-v1/get-mission')}">
+          <a ui-sref="rest-api-v1.get-mission">
+            <small class="api-endpoint"><span class="label label-success">GET</span><samp>/missions/:id</samp></small>
+            <p class="endpoint-description"><i>View mission details</i></p>
+          </a>
+        </li>
+        <li ng-class="{ active: isActive('/rest-api-v1/post-mission')}">
+          <a ui-sref="rest-api-v1.post-mission">
+            <small class="api-endpoint"><span class="label label-info">POST</span><samp>/missions/:id</samp></small>
+            <p class="endpoint-description"><i>Post or update a mission</i></p>
+          </a>
+        </li>
+        <li ng-class="{ active: isActive('/rest-api-v1/launch-mission')}">
+          <a ui-sref="rest-api-v1.launch-mission">
+            <small class="api-endpoint"><span class="label label-info">POST</span><samp>/missions/:id/launch</samp></small>
+            <p class="endpoint-description"><i>Launch mission</i></p>
+          </a>
+        </li>
+        <li ng-class="{ active: isActive('/rest-api-v1/delete-mission')}">
+          <a ui-sref="rest-api-v1.delete-mission">
+            <small class="api-endpoint"><span class="label label-danger">DELETE</span><samp>/missions/:id</samp></small>
+            <p class="endpoint-description"><i>Remove mission</i></p>
+          </a>
+        </li>
+        <li ng-class="{ active: isActive('/rest-api-v1/get-mission-agents')}">
+          <a ui-sref="rest-api-v1.get-mission-agents">
+            <small class="api-endpoint"><span class="label label-success">GET</span><samp>/missions/:id/agents</samp></small>
+            <p class="endpoint-description"><i>Mission agents list</i></p>
+          </a>
+        </li>
+        <li ng-class="{ active: isActive('/rest-api-v1/get-mission-agent')}">
+          <a ui-sref="rest-api-v1.get-mission-agent">
+            <small class="api-endpoint"><span class="label label-success">GET</span><samp>/missions/:id/agents/:id</samp></small>
+            <p class="endpoint-description"><i>Mission agent details</i></p>
+          </a>
+        </li>
+        <li ng-class="{ active: isActive('/rest-api-v1/post-mission-agent')}">
+          <a ui-sref="rest-api-v1.post-mission-agent">
+            <small class="api-endpoint"><span class="label label-info">POST</span><samp>/missions/:id/agents/:id</samp></small>
+            <p class="endpoint-description"><i>Post or update mission agent</i></p>
+          </a>
+        </li>
+        <li ng-class="{ active: isActive('/rest-api-v1/delete-mission-agent')}">
+          <a ui-sref="rest-api-v1.delete-mission-agent">
+            <small class="api-endpoint"><span class="label label-danger">DELETE</span><samp>/missions/:id/agents/:id</samp></small>
+            <p class="endpoint-description"><i>Remove agent from mission</i></p>
+          </a>
+        </li>
+        <li ng-class="{ active: isActive('/rest-api-v1/get-mission-tasks')}">
+          <a ui-sref="rest-api-v1.get-mission-tasks">
+            <small class="api-endpoint"><span class="label label-success">GET</span><samp>/missions/:id/tasks</samp></small>
+            <p class="endpoint-description"><i>Mission tasks list</i></p>
+          </a>
+        </li>
+        <li ng-class="{ active: isActive('/rest-api-v1/get-mission-task')}">
+          <a ui-sref="rest-api-v1.get-mission-task">
+            <small class="api-endpoint"><span class="label label-success">GET</span><samp>/missions/:id/task/:id</samp></small>
+            <p class="endpoint-description"><i>Mission task details</i></p>
+          </a>
+        </li>
+        <li ng-class="{ active: isActive('/rest-api-v1/mark-mission-task')}">
+          <a ui-sref="rest-api-v1.mark-mission-task">
+            <small class="api-endpoint"><span class="label label-info">POST</span><samp>/missions/:id/task/:id/mark</samp></small>
+            <p class="endpoint-description"><i>Mark mission task</i></p>
+          </a>
+        </li>
+        <li ng-class="{ active: isActive('/rest-api-v1/post-mission-task')}">
+          <a ui-sref="rest-api-v1.post-mission-task">
+            <small class="api-endpoint"><span class="label label-info">POST</span><samp>/missions/:id/task/:id</samp></small>
+            <p class="endpoint-description"><i>Post or update mission task</i></p>
+          </a>
+        </li>
+        <li ng-class="{ active: isActive('/rest-api-v1/delete-mission-task')}">
+          <a ui-sref="rest-api-v1.delete-mission-task">
+            <small class="api-endpoint"><span class="label label-danger">DELETE</span><samp>/missions/:id/task/:id</samp></small>
+            <p class="endpoint-description"><i>Remove mission task</i></p>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-5 col-sm-offset-7 col-md-7 col-md-offset-5 main" ui-view>
+
+    </div>
+  </div>
+</div>

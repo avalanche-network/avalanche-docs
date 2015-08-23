@@ -1,0 +1,81 @@
+
+
+<div class="api-endpoint">
+  <h2 style="margin-bottom: 0px;">Mission Details</h2>
+  <small class="api-endpoint"><span class="label label-success">GET</span> /missions/:id</small>
+  <hr>
+
+  <h5 class="top-spacer">Variables</h5>
+
+  <table class="table table-bordered top-spacer">
+    <tr>
+      <th>password</th>
+      <td>Security password for accessing the mission</td>
+    </tr>
+  </table>
+
+  <h5>Description</h5>
+
+  <p class="top-spacer">Returns detailed information about a mission, including lists of all agents, all tasks and recent activity.</p>
+
+  <h5>Examples</h5>
+  <tabset class="top-spacer">
+    <tab heading="cURL">
+      <div hljs language="bash">curl http://avalanche.network/api/missions/</div>
+    </tab>
+    <tab heading="jQuery">
+      <div hljs language="javascript" include="'views/snipets/jquery/get-missions-example.html'" onload="hljs"></div>
+    </tab>
+  </tabset>
+
+  <h5>Responses</h5>
+  <tabset class="top-spacer">
+    <tab heading="Try It">
+      <form class="top-spacer">
+        <div class="row">
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="exampleInputAmount" placeholder="http://avalanche.network/api/missions" disabled>
+          </div>
+          <button type="submit" class="btn btn-success" ng-click="call_api('/missions')">Try It</button>
+          <button type="submit" class="btn" ng-click="hideResponse()" ng-hide="hideResult">Hide</button>
+        </div>
+      </form>
+      <div class="table-responsive col-sm-12" ng-hide="hideResult">
+        <table class="table table-bordered top-spacer" >
+          <tr>
+            <td colspan="2">{{status(response.status)}}</td>
+          </tr>
+          <tr>
+            <td colspan="2"><json-formatter json="response.data" open="1" style="overflow-x: hidden;"></json-formatter></td>
+          </tr>
+          <tr>
+            <td>Method</td>
+            <td>{{response.config.method}}</i></td>
+          </tr>
+          <tr>
+            <td>Request Headers</td>
+            <td>{{response.config.headers.Accept}}</td>
+          </tr>
+          <tr>
+            <td>URL</td>
+            <td>{{response.config.url}}</td>
+          </tr>
+          <tr>
+            <td>Status</td>
+            <td>{{status(response.status)}}</td>
+          </tr>
+          <tr >
+            <td style="min-width: 150px;">Response Headers</td>
+            <td>{{stringfy(response.headers())}}</td>
+          </tr>
+        </table>
+      </div>
+    </tab>
+    <tab heading="Success Example">
+      <div hljs language="json" include="'views/snipets/json/get-missions-success-response-example.html'"></div>
+    </tab>
+    <tab heading="Failure Example">
+      <div hljs language="json" include="'views/snipets/json/get-missions-failure-response-example.html'"></div>
+    </tab>
+  </tabset>
+</div>
