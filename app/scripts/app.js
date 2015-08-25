@@ -13,6 +13,7 @@ angular
     'ngAnimate',
     'ngCookies',
     'ngResource',
+    'ngRoute',
     'ui.router',
     'ngSanitize',
     'ngTouch',
@@ -21,8 +22,13 @@ angular
     'jsonFormatter',
     'angularSpinner'
   ])
-  .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $httpProvider) {
+  .config(['$locationProvider', '$stateProvider', '$urlRouterProvider', '$httpProvider', function($locationProvider, $stateProvider, $urlRouterProvider, $httpProvider) {
     // Configs
+    $locationProvider.html5Mode({
+      enabled: true,
+      requireBase: true,
+      rewriteLinks: true
+    });
     //Enable cross domain calls
     $httpProvider.defaults.useXDomain = true;
     //Remove the header used to identify ajax call  that would prevent CORS from working
@@ -32,7 +38,7 @@ angular
     .state('getting-started', {
       url: "/",
       templateUrl: 'views/getting-started.html',
-      controller: 'AboutCtrl'
+      controller: 'GettingStartedCtrl'
     })
     .state('rulebook', {
       url: "/rulebook",

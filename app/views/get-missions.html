@@ -39,12 +39,28 @@
   <tabset class="top-spacer">
     <tab heading="Try It">
       <form class="top-spacer">
+        <fieldset class="form-group">
+          <div class="row">
+            <div class="col-sm-8">
+              <label for="api-token-select">OAuth Access Token</label>
+              <select class="form-control " id="api-token-select" ng-options="option for option in token track by token" ng-model="selectedToken" style="height: 38px;">
+                <option ng-repeat="option in token" value="{{option}}">{{option}}</option>
+              </select>
+            </div>
+            <div class="col-sm-4">
+              <br>
+              <a ng-click="authorizeUser()" class="btn btn-secondary-outline btn-sm" role="button" style="margin-top:10px;">Get Token</a>
+            </div>
+          </div>
+        </fieldset>
         <div class="row">
           <div class="col-sm-8">
             <input type="text" class="form-control" id="exampleInputAmount" placeholder="http://avalanche.network/api/missions" disabled>
           </div>
-          <button type="submit" class="btn btn-success" ng-click="call_api('/missions')">Try It</button>
-          <button type="submit" class="btn" ng-click="hideResponse()" ng-hide="hideResult">Hide</button>
+          <div class="col-sm-4">
+            <button type="submit" class="btn btn-success" ng-click="call_api('/missions')">Try It</button>
+            <button type="submit" class="btn" ng-click="hideResponse()" ng-hide="hideResult">Hide</button>
+          </div>
         </div>
       </form>
       <div class="table-responsive col-sm-12" ng-hide="hideResult">
