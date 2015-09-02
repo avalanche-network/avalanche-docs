@@ -1,0 +1,13 @@
+<fieldset class="form-group">
+  <div class="row">
+    <div class="col-sm-9">
+      <label for="api-token-select">OAuth Access Token</label>
+      <select class="form-control " id="api-token-select" ng-options="option for option in tokens.availableOptions track by option" ng-model="tokens.selectedToken" style="height: 38px;">
+      </select>
+    </div>
+    <div class="col-sm-3">
+      <br>
+      <a ng-click="authorizeUser()" class="btn btn-secondary-outline btn-sm" role="button" style="margin-top:10px;">Get Token</a>
+    </div>
+  </div>
+</fieldset>

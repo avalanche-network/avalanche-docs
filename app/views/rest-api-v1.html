@@ -6,99 +6,64 @@
         <li><a ui-sref="getting-started">Getting Started</a></li>
         <li><a ui-sref="rulebook.intro">Rulebook</a></li>
         <li><a ui-sref="styleguide">Styleguide</a></li>
-        <li class="active"><a ui-sref="rest-api-v1.get-missions">Restfull API v1 <span class="sr-only">(current)</span></a></li>
+        <li class="active"><a ui-sref="rest-api-v1({ id: 'get-missions' })">Restfull API v1 <span class="sr-only">(current)</span></a></li>
         <li><a ui-sref="realtime-api-v1">Realtime API v1</a></li>
       </ul>
     </div>
     <div class="col-sm-4 col-md-3 col-md-offset-2 col-sm-offset-3 sidebar sidebar-secondary">
       <ul class="nav nav-sidebar">
-        <li ng-class="{ active: isActive('/rest-api-v1/get-missions')}">
-          <a ui-sref="rest-api-v1.get-missions">
-            <small class="api-endpoint"><span class="label label-success">GET</span><samp>/missions/</samp></small>
-            <p class="endpoint-description"><i>Mission list</i></p>
+        <li ng-repeat="page in pageList" ng-class="{ active: isActive(page.pageUrl)}">
+          <a ui-sref="rest-api-v1({ id: page.slug })">
+            <small class="api-endpoint"><span ng-class="callTypeBadge(page.endpoint.type)">{{page.endpoint.type}}</span><samp>{{page.endpoint.base}}</samp></small>
+            <p class="endpoint-description"><i>{{page.title}}</i></p>
           </a>
         </li>
-        <li ng-class="{ active: isActive('/rest-api-v1/get-mission')}">
-          <a ui-sref="rest-api-v1.get-mission">
-            <small class="api-endpoint"><span class="label label-success">GET</span><samp>/missions/:id</samp></small>
-            <p class="endpoint-description"><i>View mission details</i></p>
-          </a>
-        </li>
-        <li ng-class="{ active: isActive('/rest-api-v1/post-mission')}">
-          <a ui-sref="rest-api-v1.post-mission">
-            <small class="api-endpoint"><span class="label label-info">POST</span><samp>/missions/:id</samp></small>
-            <p class="endpoint-description"><i>Post or update a mission</i></p>
-          </a>
-        </li>
-        <li ng-class="{ active: isActive('/rest-api-v1/launch-mission')}">
-          <a ui-sref="rest-api-v1.launch-mission">
-            <small class="api-endpoint"><span class="label label-info">POST</span><samp>/missions/:id/launch</samp></small>
-            <p class="endpoint-description"><i>Launch mission</i></p>
-          </a>
-        </li>
-        <li ng-class="{ active: isActive('/rest-api-v1/delete-mission')}">
-          <a ui-sref="rest-api-v1.delete-mission">
-            <small class="api-endpoint"><span class="label label-danger">DELETE</span><samp>/missions/:id</samp></small>
-            <p class="endpoint-description"><i>Remove mission</i></p>
-          </a>
-        </li>
-        <li ng-class="{ active: isActive('/rest-api-v1/get-mission-agents')}">
-          <a ui-sref="rest-api-v1.get-mission-agents">
-            <small class="api-endpoint"><span class="label label-success">GET</span><samp>/missions/:id/agents</samp></small>
-            <p class="endpoint-description"><i>Mission agents list</i></p>
-          </a>
-        </li>
-        <li ng-class="{ active: isActive('/rest-api-v1/get-mission-agent')}">
-          <a ui-sref="rest-api-v1.get-mission-agent">
-            <small class="api-endpoint"><span class="label label-success">GET</span><samp>/missions/:id/agents/:id</samp></small>
-            <p class="endpoint-description"><i>Mission agent details</i></p>
-          </a>
-        </li>
-        <li ng-class="{ active: isActive('/rest-api-v1/post-mission-agent')}">
-          <a ui-sref="rest-api-v1.post-mission-agent">
-            <small class="api-endpoint"><span class="label label-info">POST</span><samp>/missions/:id/agents/:id</samp></small>
-            <p class="endpoint-description"><i>Post or update mission agent</i></p>
-          </a>
-        </li>
-        <li ng-class="{ active: isActive('/rest-api-v1/delete-mission-agent')}">
-          <a ui-sref="rest-api-v1.delete-mission-agent">
-            <small class="api-endpoint"><span class="label label-danger">DELETE</span><samp>/missions/:id/agents/:id</samp></small>
-            <p class="endpoint-description"><i>Remove agent from mission</i></p>
-          </a>
-        </li>
-        <li ng-class="{ active: isActive('/rest-api-v1/get-mission-tasks')}">
-          <a ui-sref="rest-api-v1.get-mission-tasks">
-            <small class="api-endpoint"><span class="label label-success">GET</span><samp>/missions/:id/tasks</samp></small>
-            <p class="endpoint-description"><i>Mission tasks list</i></p>
-          </a>
-        </li>
-        <li ng-class="{ active: isActive('/rest-api-v1/get-mission-task')}">
-          <a ui-sref="rest-api-v1.get-mission-task">
-            <small class="api-endpoint"><span class="label label-success">GET</span><samp>/missions/:id/task/:id</samp></small>
-            <p class="endpoint-description"><i>Mission task details</i></p>
-          </a>
-        </li>
-        <li ng-class="{ active: isActive('/rest-api-v1/mark-mission-task')}">
-          <a ui-sref="rest-api-v1.mark-mission-task">
-            <small class="api-endpoint"><span class="label label-info">POST</span><samp>/missions/:id/task/:id/mark</samp></small>
-            <p class="endpoint-description"><i>Mark mission task</i></p>
-          </a>
-        </li>
-        <li ng-class="{ active: isActive('/rest-api-v1/post-mission-task')}">
-          <a ui-sref="rest-api-v1.post-mission-task">
-            <small class="api-endpoint"><span class="label label-info">POST</span><samp>/missions/:id/task/:id</samp></small>
-            <p class="endpoint-description"><i>Post or update mission task</i></p>
-          </a>
-        </li>
-        <li ng-class="{ active: isActive('/rest-api-v1/delete-mission-task')}">
-          <a ui-sref="rest-api-v1.delete-mission-task">
-            <small class="api-endpoint"><span class="label label-danger">DELETE</span><samp>/missions/:id/task/:id</samp></small>
-            <p class="endpoint-description"><i>Remove mission task</i></p>
-          </a>
-        </li>
+
       </ul>
     </div>
-    <div class="col-sm-5 col-sm-offset-7 col-md-7 col-md-offset-5 main" ui-view>
+    <div class="col-sm-5 col-sm-offset-7 col-md-7 col-md-offset-5 main">
+      <div class="api-endpoint">
+        <h2 style="margin-bottom: 0px;">{{pageData.title}}</h2>
+        <small class="api-endpoint"><span ng-class="callTypeBadge(pageData.endpoint.type)">{{pageData.endpoint.type}}</span> {{pageData.endpoint.base}}</small>
+        <hr>
+
+        <div ng-if="pageData.description != undefined">
+          <p ng-bind-html="pageData.description"></p>
+        </div>
+
+        <div ng-if="pageData.variables.length > 0">
+          <h5 class="top-spacer">Variables</h5>
+          <table class="table table-bordered top-spacer">
+            <tr ng-repeat="variable in pageData.variables">
+              <th>{{variable.name}}</th>
+              <td ng-bind-html="variable.description"></td>
+            </tr>
+          </table>
+        </div>
+
+        <div ng-if="pageData.examples.length > 0">
+          <h5>Examples</h5>
+          <tabset class="top-spacer">
+            <tab ng-repeat="example in pageData.examples" heading="{{example.name}}">
+              <div hljs language="{{example.language}}" include="example.code" onload="hljs"></div>
+            </tab>
+          </tabset>
+        </div>
+
+        <h5>Responses</h5>
+        <form class="top-spacer">
+          <ng-include src="'views/helpers/api-token-field.html'"></ng-include>
+          <div  class="row">
+              <div class="col-sm-3" ng-repeat="variable in pageData.variables">
+                <fieldset class="form-group">
+                  <label for="{{variable.name}}">{{variable.name}}</label>
+                  <input type="text" class="form-control" id="{{variable.name}}" placeholder="{{variable.placeholder}}" ng-model="variable.value">
+                </fieldset>
+              </div>
+          </div>
+          <ng-include src="'views/helpers/api-endpoint-field.html'"></ng-include>
+        </form>
+        <ng-include src="'views/helpers/api-response.html'"></ng-include>
 
     </div>
   </div>

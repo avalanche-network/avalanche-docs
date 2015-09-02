@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-sm-9">
+    <fieldset class="form-group">
+      <label for="exampleInputEmail1">API Endpoint</label>
+      <input type="text" class="form-control" id="endpoint" placeholder="{{fullURL(pageData.endpoint.base)}}" disabled>
+    </fieldset>
+  </div>
+  <div class="col-sm-3">
+    <fieldset class="form-group" style="margin-top: 35px;">
+      <button type="submit" class="btn btn-success btn-sm" ng-click="getData(pageData.endpoint.base)">Test</button>
+      <button type="submit" class="btn btn-sm" ng-click="hideResponse()" ng-hide="hideResult">Hide</button>
+    </fieldset>
+  </div>
+</div>

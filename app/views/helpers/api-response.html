@@ -1,0 +1,30 @@
+<div class="table-responsive col-sm-12" ng-hide="hideResult">
+  <table class="table table-bordered top-spacer" >
+    <tr>
+      <td colspan="2">{{status(response.status).code}}</td>
+    </tr>
+    <tr>
+      <td colspan="2"><json-formatter json="response.data" open="1" style="overflow-x: hidden;"></json-formatter></td>
+    </tr>
+    <tr>
+      <td>Method</td>
+      <td>{{response.config.method}}</i></td>
+    </tr>
+    <tr>
+      <td>Request Headers</td>
+      <td>{{response.config.headers.Accept}}</td>
+    </tr>
+    <tr>
+      <td>URL</td>
+      <td>{{response.config.url}}</td>
+    </tr>
+    <tr>
+      <td>Status</td>
+      <td>{{status(response.status).code}} - {{status(response.status).info}}</td>
+    </tr>
+    <tr >
+      <td style="min-width: 150px;">Response Headers</td>
+      <td>{{stringfy(response.headers())}}</td>
+    </tr>
+  </table>
+</div>

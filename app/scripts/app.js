@@ -42,7 +42,7 @@ angular
     })
     .state('rulebook', {
       url: "/rulebook",
-      templateUrl: 'views/rulebook.html',
+      templateUrl: 'views/rulebook/index.html',
       controller: 'RulebookCtrl'
     })
     .state('rulebook.intro', {
@@ -56,19 +56,14 @@ angular
       controller: 'AboutCtrl'
     })
     .state('rest-api-v1', {
-      url: "/rest-api-v1",
+      url: "/rest-api-v1/:id",
       templateUrl: "views/rest-api-v1.html",
-      controller: 'RestAPIv1Ctrl'
-    })
-    .state('rest-api-v1.get-missions', {
-      url: "/get-missions",
-      templateUrl: "views/get-missions.html",
-      controller: 'GetMissionsController'
-    })
-    .state('rest-api-v1.get-mission', {
-      url: "/get-mission",
-      templateUrl: "views/get-mission.html",
-      controller: 'GetMissionsController'
+      controller: 'RestAPIv1Ctrl',
+      resolve: {
+        pageData: function($stateParams, PageService) {
+          return PageService.find($stateParams.id);
+        },
+      }
     })
 
   }]);

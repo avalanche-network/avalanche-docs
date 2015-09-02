@@ -21,6 +21,7 @@
     <!-- endbuild -->
     <link rel="stylesheet" href="styles/tomorrow-night-eighties.css">
     <script src="scripts/libs/highlight.min.js"></script>
+
   </head>
   <body ng-app="avalancheDocsApp">
     <span us-spinner="{radius:30, width:8, length: 16}" spinner-key="spinner-1"></span>
@@ -32,7 +33,7 @@
     <div ui-view></div>
 
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID
      <script>
        !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
        (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
@@ -42,7 +43,8 @@
        ga('create', 'UA-XXXXX-X');
        ga('send', 'pageview');
     </script>
-
+    -->
+    
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -68,10 +70,12 @@
         <script src="scripts/controllers/getting-started-ctrl.js"></script>
         <script src="scripts/controllers/rulebook-ctrl.js"></script>
         <script src="scripts/controllers/rest-api-v1-ctrl.js"></script>
-        <script src="scripts/controllers/get-missions-ctrl.js"></script>
         <script src="scripts/controllers/about.js"></script>
         <script src="scripts/services/oauth-service.js"></script>
-        <script src="scripts/services/get-data.js"></script>
+        <script src="scripts/services/data-service.js"></script>
+        <script src="scripts/services/page-service.js"></script>
         <!-- endbuild -->
+
+
 </body>
 </html>
