@@ -19,6 +19,10 @@ angular.module('avalancheDocsApp')
       $location.path($sanitize(before_login_page)).replace();
     }
 
+    $scope.navActivePage = function (viewLocation) {
+        return viewLocation === "getting-started";
+    };
+
 
 
   }]);

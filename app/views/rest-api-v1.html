@@ -1,15 +1,6 @@
 <div class="container-fluid" >
   <div class="row">
-    <div class="col-sm-3 col-md-2 sidebar sidebar-main">
-      <h1>docs</h1>
-      <ul class="nav nav-sidebar">
-        <li><a ui-sref="getting-started">Getting Started</a></li>
-        <li><a ui-sref="rulebook.intro">Rulebook</a></li>
-        <li><a ui-sref="styleguide">Styleguide</a></li>
-        <li class="active"><a ui-sref="rest-api-v1({ id: 'get-missions' })">Restfull API v1 <span class="sr-only">(current)</span></a></li>
-        <li><a ui-sref="realtime-api-v1">Realtime API v1</a></li>
-      </ul>
-    </div>
+    <ng-include src="'views/helpers/sidebar.html'"></ng-include>
     <div class="col-sm-4 col-md-3 col-md-offset-2 col-sm-offset-3 sidebar sidebar-secondary">
       <ul class="nav nav-sidebar">
         <li ng-repeat="page in pageList" ng-class="{ active: isActive(page.pageUrl)}">
@@ -31,6 +22,8 @@
           <p ng-bind-html="pageData.description"></p>
         </div>
 
+        <ng-include src="'views/helpers/under-construction.html'" ng-hide="pageData.implemented"></ng-include>
+
         <div ng-if="pageData.variables.length > 0">
           <h5 class="top-spacer">Variables</h5>
           <table class="table table-bordered top-spacer">
@@ -50,20 +43,22 @@
           </tabset>
         </div>
 
-        <h5>Responses</h5>
-        <form class="top-spacer">
-          <ng-include src="'views/helpers/api-token-field.html'"></ng-include>
-          <div  class="row">
-              <div class="col-sm-3" ng-repeat="variable in pageData.variables">
-                <fieldset class="form-group">
-                  <label for="{{variable.name}}">{{variable.name}}</label>
-                  <input type="text" class="form-control" id="{{variable.name}}" placeholder="{{variable.placeholder}}" ng-model="variable.value">
-                </fieldset>
-              </div>
-          </div>
-          <ng-include src="'views/helpers/api-endpoint-field.html'"></ng-include>
-        </form>
-        <ng-include src="'views/helpers/api-response.html'"></ng-include>
+        <div ng-show="pageData.implemented">
+          <h5>Responses</h5>
+          <form class="top-spacer">
+            <ng-include src="'views/helpers/api-token-field.html'"></ng-include>
+            <div  class="row">
+                <div class="col-sm-3" ng-repeat="variable in pageData.variables">
+                  <fieldset class="form-group">
+                    <label for="{{variable.name}}">{{variable.name}}</label>
+                    <input type="text" class="form-control" id="{{variable.name}}" placeholder="{{variable.placeholder}}" ng-model="variable.value">
+                  </fieldset>
+                </div>
+            </div>
+            <ng-include src="'views/helpers/api-endpoint-field.html'"></ng-include>
+          </form>
+          <ng-include src="'views/helpers/api-response.html'"></ng-include>
+        </div>
 
     </div>
   </div>

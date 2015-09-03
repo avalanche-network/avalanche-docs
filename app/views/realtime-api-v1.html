@@ -1,0 +1,78 @@
+<div class="container-fluid" >
+  <div class="row">
+    <ng-include src="'views/helpers/sidebar.html'"></ng-include>
+    <div class="col-sm-4 col-md-3 col-md-offset-2 col-sm-offset-3 sidebar sidebar-secondary">
+      <ul class="nav nav-sidebar">
+        <li ng-repeat="page in pageList" ng-class="{ active: isActive(page.pageUrl)}">
+          <a ui-sref="realtime-api-v1({ id: page.slug})">
+            <h5>{{page.title}}</h5>
+            <p class="endpoint-description"><i>{{page.tagline}}</i></p>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-5 col-sm-offset-7 col-md-7 col-md-offset-5 main">
+      <div class="api-endpoint">
+        <h2 style="margin-bottom: 0px;">{{pageData.title}}</h2>
+        <small class="api-endpoint"><span ng-class="callTypeBadge(pageData.endpoint.type)">{{pageData.endpoint.type}}</span> {{pageData.endpoint.base}}</small>
+        <hr>
+
+        <div ng-if="pageData.description != undefined">
+          <p ng-bind-html="pageData.description"></p>
+        </div>
+
+        <ng-include src="'views/helpers/under-construction.html'" ng-hide="pageData.implemented"></ng-include>
+
+        <div class="top-spacer" ng-show="pageData.implemented">
+          <h5>Subscribe to channel</h5>
+          <p class="top-spacer">
+            To subscribe, first get the mission chanel name using the restfull API and authentication scheme. After you have the mission chanel name, use faye to subscribe to that chanel.
+          </p>
+          <div  class="row top-spacer">
+              <div class="col-sm-9">
+                <fieldset class="form-group">
+                  <label for="mission-slug">Mission Channel Name</label>
+                  <input type="text" class="form-control" id="mission-slug" placeholder="/missions/example-mission" ng-model="MissionChanelName" ng-hide="has_connection">
+                  <input type="text" class="form-control" id="mission-slug" placeholder="/missions/example-mission" ng-model="MissionChanelName" ng-show="has_connection" disabled>
+                </fieldset>
+              </div>
+              <div class="col-sm-3">
+                <fieldset class="form-group" style="margin-top: 35px;">
+                  <button type="submit" class="btn btn-success btn-sm" ng-click="subscribe(MissionChanelName)" ng-hide="has_connection">Connect</button>
+                  <button type="submit" class="btn btn-danger-outline btn-sm" ng-click="disconect()" ng-show="has_connection">Disconect</button>
+                </fieldset>
+              </div>
+          </div>
+          <div  class="row" ng-show="subscribing">
+            <div class="table-responsive col-sm-12" >
+              <table class="table table-bordered top-spacer" >
+                <tr>
+                  <td colspan="2"><span ng-bind-html="connection_status"></span><i class="pull-right" ng-bind="messages.length + ' messages received'"></i></td>
+                </tr>
+                <tr>
+                  <td colspan="2"><json-explorer data="messages"></json-explorer></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="row" ng-show="subscribing && logged_in">
+            <div class="col-sm-9">
+              <fieldset class="form-group">
+                <label for="mission-slug">Chat message</label>
+                <input type="text" class="form-control" id="mission-slug" placeholder="" ng-model="chatMessage">
+              </fieldset>
+            </div>
+            <div class="col-sm-3">
+              <fieldset class="form-group" style="margin-top: 35px;">
+                <button type="submit" class="btn btn-success btn-sm" ng-click="getData(pageData.endpoint.base)">Send Msg</button>
+              </fieldset>
+            </div>
+          </div>
+      </div>
+
+
+
+
+    </div>
+  </div>
+</div>

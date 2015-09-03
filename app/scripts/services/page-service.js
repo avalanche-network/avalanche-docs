@@ -3,16 +3,16 @@ angular.module('avalancheDocsApp')
   var pages = [];
   var current_page = {};
 
-  this.find = function(page){
+  this.find = function(group, page){
     if( pages.length > 0) {
-      searchForPage(page);
+      searchForPage(group, page);
     } else {
       $http({
         method: 'GET',
-        url: 'data/rest-api-v1-pages.json'
+        url: 'data/page-list.json'
       }).then(function(data) {
         pages = data.data;
-        searchForPage(page);
+        searchForPage(group, page);
         $rootScope.$broadcast('get-pages:finished');
       });
     }
@@ -22,16 +22,16 @@ angular.module('avalancheDocsApp')
     return current_page;
   }
 
-  this.all = function(){
-    return pages;
+  this.all = function(group){
+    return pages[group];
   }
 
-  searchForPage = function(page) {
+  searchForPage = function(group, page) {
     //console.log("searching for " + page);
-    for (var i = 0; i < pages.length; i++) {
-      //console.log(pages[i].slug);
-      if (pages[i].slug == page) {
-        current_page = pages[i];
+    for (var i = 0; i < pages[group].length; i++) {
+      //console.log(pages[group][i].slug);
+      if (pages[group][i].slug == page) {
+        current_page = pages[group][i];
         return current_page;
       }
     }

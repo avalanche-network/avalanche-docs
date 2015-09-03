@@ -1,0 +1,251 @@
+{
+  "rulebook" :
+    [
+      {
+        "pageUrl" : "/rulebook/intro",
+        "slug" : "intro",
+        "title" : "Introduction",
+        "tagline" : "What is Avalanche Network?",
+        "content" : "data/rulebook/intro.md"
+      },
+      {
+        "pageUrl" : "/rulebook/missions",
+        "slug" : "missions",
+        "title" : "Mission Basics",
+        "tagline" : "Mechanics of how a mission works"
+      },
+      {
+        "pageUrl" : "/rulebook/tasks",
+        "slug" : "tasks",
+        "title" : "Tasks & Validations",
+        "tagline" : "How to automaticaly validate tasks"
+      }
+    ],
+  "rest-api-v1" :
+    [
+      {
+        "pageUrl" : "/rest-api-v1/get-missions",
+        "slug"  : "get-missions",
+        "title" : "Mission List",
+        "endpoint" : {
+          "type" : "GET",
+          "base" : "/missions"
+        },
+        "implemented" : true,
+        "description" : "You can get a list of missions and their details using this endpoint. Its also possible to do pagination and use filters to fine grain the returned results.",
+        "variables" : [
+          {
+            "name" : "count",
+            "description" : "The number of items in the list",
+            "variable_type" : "number"
+          },
+          {
+            "name" : "page",
+            "description" : "The page of items to be return. <i>Example: if count is 10 and page is 3, then the items 20-30 will be returned.</i>",
+            "variable_type" : "number"
+          },
+          {
+            "name" : "status",
+            "description" : "Filter for the missions status. Status can be <code>Planning</code>, <code>Launched</code>, <code>Completed</code>, <code>Failed</code> or <code>Canceled</code>",
+            "variable_type" : "string"
+          }
+        ],
+        "examples" : [
+          {
+            "name" : "cURL",
+            "language" : "bash",
+            "code" : "views/snipets/bash/get-missions-example.html"
+          },
+          {
+            "name" : "jQuery",
+            "language" : "javascript",
+            "code" : "views/snipets/jquery/get-missions-example.html"
+          }
+        ]
+      },
+      {
+        "pageUrl" : "/rest-api-v1/get-mission",
+        "slug"  : "get-mission",
+        "title" : "Mission Details",
+        "endpoint" : {
+          "type" : "GET",
+          "base" : "/missions/:slug"
+        },
+        "implemented" : true,
+        "description" : "Returns detailed information about a mission, including lists of all agents, all tasks and recent activity.",
+        "variables" : [
+          {
+            "name" : "slug",
+            "description" : "A unique shortname identifier for the mission.",
+            "variable_type" : "string"
+          }
+        ],
+        "examples" : [
+          {
+            "name" : "cURL",
+            "language" : "bash",
+            "code" : "views/snipets/bash/get-mission-example.html"
+          },
+          {
+            "name" : "jQuery",
+            "language" : "javascript",
+            "code" : "views/snipets/jquery/get-mission-example.html"
+          }
+        ]
+      },
+      {
+        "pageUrl" : "/rest-api-v1/post-mission",
+        "slug"  : "post-mission",
+        "title" : "Post Mission",
+        "endpoint" : {
+          "type" : "POST",
+          "base" : "/missions"
+        },
+        "description" : "Creates a new mission on the system and returns it back. A user token is needed for this request.",
+        "variables" : [
+          {
+            "name" : "slug",
+            "description" : "A shortname without spaces used as the mission identifier and url. This needs to be unique.",
+            "variable_type" : "string"
+          },
+          {
+            "name" : "title",
+            "description" : "The mission's title or name",
+            "variable_type" : "string"
+          }
+        ]
+      },
+      {
+        "pageUrl" : "/rest-api-v1/launch-mission",
+        "slug"  : "launch-mission",
+        "title" : "Launch Mission",
+        "endpoint" : {
+          "type" : "POST",
+          "base" : "/missions/:slug/launch"
+        }
+      },
+      {
+        "pageUrl" : "/rest-api-v1/delete-mission",
+        "slug"  : "delete-mission",
+        "title" : "Delete Mission",
+        "endpoint" : {
+          "type" : "DELETE",
+          "base" : "/missions/:slug"
+        }
+      },
+      {
+        "pageUrl" : "/rest-api-v1/get-mission-agents",
+        "slug"  : "get-mission-agents",
+        "title" : "Mission Agent List",
+        "endpoint" : {
+          "type" : "GET",
+          "base" : "/missions/:slug/agents"
+        }
+      },
+      {
+        "pageUrl" : "/rest-api-v1/get-mission-agent",
+        "slug"  : "get-mission-agent",
+        "title" : "Mission Agent Details",
+        "endpoint" : {
+          "type" : "GET",
+          "base" : "/missions/:slug/agents/:slug"
+        }
+      },
+      {
+        "pageUrl" : "/rest-api-v1/post-mission-agent",
+        "slug"  : "post-mission-agent",
+        "title" : "Post Mission Agent",
+        "endpoint" : {
+          "type" : "POST",
+          "base" : "/missions/:slug/agents"
+        }
+      },
+      {
+        "pageUrl" : "/rest-api-v1/delete-mission-agent",
+        "slug"  : "delete-mission-agent",
+        "title" : "Delete Mission Agent",
+        "endpoint" : {
+          "type" : "DELETE",
+          "base" : "/missions/:slug/agents/:slug"
+        }
+      },
+      {
+        "pageUrl" : "/rest-api-v1/get-mission-tasks",
+        "slug"  : "get-mission-tasks",
+        "title" : "Mission Task List",
+        "endpoint" : {
+          "type" : "GET",
+          "base" : "/missions/:slug/tasks"
+        }
+      },
+      {
+        "pageUrl" : "/rest-api-v1/get-mission-task",
+        "slug"  : "get-mission-task",
+        "title" : "Mission Task Details",
+        "endpoint" : {
+          "type" : "GET",
+          "base" : "/missions/:slug/tasks/:id"
+        }
+      },
+      {
+        "pageUrl" : "/rest-api-v1/mark-mission-task",
+        "slug"  : "mark-mission-task",
+        "title" : "Mark Mission Task",
+        "endpoint" : {
+          "type" : "POST",
+          "base" : "/missions/:slug/tasks/:id/mark"
+        }
+      },
+      {
+        "pageUrl" : "/rest-api-v1/post-mission-task",
+        "slug"  : "post-mission-task",
+        "title" : "Post Mission Task",
+        "endpoint" : {
+          "type" : "POST",
+          "base" : "/missions/:slug/tasks"
+        }
+      },
+      {
+        "pageUrl" : "/rest-api-v1/delete-mission-task",
+        "slug"  : "delete-mission-task",
+        "title" : "Delete Mission Task",
+        "endpoint" : {
+          "type" : "DELETE",
+          "base" : "/missions/:slug/tasks/:id"
+        }
+      }
+    ],
+    "realtime-api-v1" :
+    [
+      {
+        "pageUrl" : "/realtime-api-v1/realtime-mission-activity",
+        "slug"  : "realtime-mission-activity",
+        "title" : "Mission Activity",
+        "tagline" : "subscribe to a mission activity feed",
+        "description" : "Subscribe to a missions activity feed for realtime updates. Activities includes updates on all public messages, agents, tasks, rewards and mission status.",
+        "implemented" : true
+      },
+      {
+        "pageUrl" : "/realtime-api-v1/realtime-mission-agents",
+        "slug"  : "realtime-mission-agents",
+        "title" : "Mission Agents Status",
+        "tagline" : "Status off all agents on a mission",
+        "description" : "Subscribe to get changes from agents status on a specific mission. Basically when a mission agent changes connection status (online/offline) or location a message is broadcasted.",
+        "implemented" : false
+      },
+      {
+        "pageUrl" : "/realtime-api-v1/agent-status",
+        "slug"  : "agent-status",
+        "title" : "Agent Status",
+        "tagline" : "Agent online/offline status, position and stats",
+        "implemented" : false
+      },
+      {
+        "pageUrl" : "/realtime-api-v1/realtime-user-notifications",
+        "slug"  : "realtime-user-notifications",
+        "title" : "User Notifications",
+        "tagline" : "Personal user notification feed",
+        "implemented" : false
+      }
+    ]
+}

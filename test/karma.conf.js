@@ -37,6 +37,10 @@ module.exports = function(config) {
       'bower_components/spin.js/spin.js',
       'bower_components/angular-spinner/angular-spinner.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
+      'bower_components/showdown/src/showdown.js',
+      'bower_components/angularjs/angular.js',
+      'bower_components/angular-markdown-directive/markdown.js',
+      'bower_components/ng-json-explorer/dist/angular-json-explorer.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

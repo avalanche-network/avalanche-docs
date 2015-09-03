@@ -1,0 +1,22 @@
+<div class="container-fluid" >
+  <div class="row">
+    <ng-include src="'views/helpers/sidebar.html'"></ng-include>
+    <div class="col-sm-4 col-md-3 col-md-offset-2 col-sm-offset-3 sidebar sidebar-secondary">
+      <ul class="nav nav-sidebar">
+        <li ng-repeat="page in pageList" ng-class="{ active: isActive(page.pageUrl)}">
+          <a ui-sref="rulebook({ id: page.slug})">
+            <h5>{{page.title}}</h5>
+            <p class="endpoint-description"><i>{{page.tagline}}</i></p>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-5 col-sm-offset-7 col-md-7 col-md-offset-5 main" ui-view>
+      <div class="api-endpoint">
+        <h2 style="margin-bottom: 0px;">{{pageData.title}}</h2>
+        <hr>
+      </div>
+      <div btf-markdown ng-include="pageData.content">
+    </div>
+  </div>
+</div>

@@ -8,10 +8,10 @@
  * Controller of the avalancheDocsApp
  */
 angular.module('avalancheDocsApp')
-  .controller('RestAPIv1Ctrl', ['$scope', '$location', '$cookies', '$window', '$rootScope', 'DataService', 'usSpinnerService', 'OAuthService', 'PageService',  function ($scope, $location, $cookies, $window, $rootScope, DataService, usSpinnerService, OAuthService, PageService) {
+  .controller('RealtimeAPIv1Ctrl', ['$scope', '$location', '$cookies', '$window', '$rootScope', 'DataService', 'usSpinnerService', 'OAuthService', 'PageService', 'RealtimeService',  function ($scope, $location, $cookies, $window, $rootScope, DataService, usSpinnerService, OAuthService, PageService, RealtimeService) {
 
     $scope.pageData = PageService.get();
-    $scope.pageList = PageService.all("rest-api-v1");
+    $scope.pageList = PageService.all("realtime-api-v1");
     //console.log("Loading page " + $scope.pageData.title)
 
     $rootScope.$on('get-pages:finished', function() {
@@ -25,7 +25,7 @@ angular.module('avalancheDocsApp')
     });
 
     $scope.navActivePage = function (viewLocation) {
-        return viewLocation === "rest-api-v1";
+        return viewLocation === "realtime-api-v1";
     };
 
     $scope.isActive = function (viewLocation) {
@@ -106,59 +106,73 @@ angular.module('avalancheDocsApp')
       }
     });
 
-    // Misc Functions
-
-    $scope.fullURL = function(url){
-      return "http://localhost:5000/api" + url;
+    $scope.subscribing = false;
+    $scope.messages = [];
+    $scope.messages.add = function(message) {
+      this.push(message);
     }
 
-    $scope.status = function(code) {
-      if(code == 200){
-        return {
-          code : "200 OK",
-          info: ""
-        };
+    // Listen to data coming from the server via Faye
+    $scope.subscribe = function(url){
+      if($scope.has_disconected == true){
+        RealtimeService.connect();
       }
-      if(code == 201){
-        return {
-          code : "201 Created",
-          info: "The request has been fulfilled and resulted in a new resource being created."
-        };
-      }
-      if(code == 401){
-        return {
-          code : "401 Unauthorized",
-          info: ""
-        };
-      }
-      if(code == 422){
-        return {
-          code : "422 Unprocessable Entity",
-          info: "The request was well-formed but was unable to be followed due to semantic errors."
-        };
-      }
-      if(code == 500){
-        return {
-          code : "500 Internal Server Error",
-          info: "A generic error message, given when an unexpected condition was encountered and no more specific message is suitable."
-        };
-      }
+      RealtimeService.subscribe(url, function(msg) {
+        $scope.$apply(function() {
+          $scope.messages.add(msg);
+          console.log(msg);
+        });
+      });
     }
 
-    $scope.stringfy = function(data) {
-      return JSON.stringify(data, null, 4);
-    }
 
-    $scope.callTypeBadge = function(call) {
-      if(call == "GET"){
-        return "label label-success"
-      } else if(call == "POST"){
-        return "label label-info"
-      } else if(call == "DELETE"){
-        return "label label-danger"
+    // Post the data to the server and have it send to us
+    $scope.sendServer = function() {
+      $http.post('/', { foo: 'asd', message: $scope.message })
+        .success(function() {
+          $scope.message = '';
+        })
+        .error(function(data, status) {
+          $scope.messages.add('error', "Error doing POST to server: " + status);
+        });
+    };
+
+    // Send data to server via Faye
+    $scope.sendClient = function() {
+      Faye.publish('/fromclient', $scope.message);
+      $scope.messages.add('outgoing', $scope.message);
+      $scope.message = '';
+    };
+
+    // Misc
+    $rootScope.$on('realtime:offline', function() {
+      if(!$scope.$$phase) {
+        $scope.$apply(function(){
+          $scope.connection_status = "<div class=\"circle-error\"></div> Disconected";
+          $scope.has_connection = false;
+        })
       } else {
-        return "label"
+        $scope.connection_status = "<div class=\"circle-error\"></div> Disconected";
+        $scope.has_connection = false;
       }
+    });
+    $rootScope.$on('realtime:online', function() {
+      if(!$scope.$$phase) {
+        $scope.$apply(function(){
+          $scope.connection_status = "<div class=\"circle-ok\"></div> Connected";
+          $scope.has_connection = true;
+          $scope.subscribing = true;
+        })
+      } else {
+        $scope.connection_status = "<div class=\"circle-ok\"></div> Connected";
+        $scope.has_connection = true;
+        $scope.subscribing = true;
+      }
+    });
+    $scope.disconect = function() {
+      RealtimeService.disconect();
+      $scope.has_disconected = true;
     }
+
 
   }]);

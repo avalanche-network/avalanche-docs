@@ -10,6 +10,7 @@
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/ng-json-explorer/dist/angular-json-explorer.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -21,6 +22,7 @@
     <!-- endbuild -->
     <link rel="stylesheet" href="styles/tomorrow-night-eighties.css">
     <script src="scripts/libs/highlight.min.js"></script>
+    <script src="scripts/libs/faye-browser.js"></script>
 
   </head>
   <body ng-app="avalancheDocsApp">
@@ -44,12 +46,13 @@
        ga('send', 'pageview');
     </script>
     -->
-    
+
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angularjs/angular.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
@@ -62,6 +65,9 @@
     <script src="bower_components/spin.js/spin.js"></script>
     <script src="bower_components/angular-spinner/angular-spinner.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/showdown/src/showdown.js"></script>
+    <script src="bower_components/angular-markdown-directive/markdown.js"></script>
+    <script src="bower_components/ng-json-explorer/dist/angular-json-explorer.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -70,9 +76,11 @@
         <script src="scripts/controllers/getting-started-ctrl.js"></script>
         <script src="scripts/controllers/rulebook-ctrl.js"></script>
         <script src="scripts/controllers/rest-api-v1-ctrl.js"></script>
+        <script src="scripts/controllers/realtime-api-v1-ctrl.js"></script>
         <script src="scripts/controllers/about.js"></script>
         <script src="scripts/services/oauth-service.js"></script>
         <script src="scripts/services/data-service.js"></script>
+        <script src="scripts/services/realtime-service.js"></script>
         <script src="scripts/services/page-service.js"></script>
         <!-- endbuild -->
 

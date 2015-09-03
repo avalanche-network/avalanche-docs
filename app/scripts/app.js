@@ -19,8 +19,9 @@ angular
     'ngTouch',
     'ui.bootstrap',
     'hljs',
-    'jsonFormatter',
-    'angularSpinner'
+    'ngJsonExplorer',
+    'angularSpinner',
+    'btford.markdown'
   ])
   .config(['$locationProvider', '$stateProvider', '$urlRouterProvider', '$httpProvider', function($locationProvider, $stateProvider, $urlRouterProvider, $httpProvider) {
     // Configs
@@ -41,19 +42,14 @@ angular
       controller: 'GettingStartedCtrl'
     })
     .state('rulebook', {
-      url: "/rulebook",
-      templateUrl: 'views/rulebook/index.html',
-      controller: 'RulebookCtrl'
-    })
-    .state('rulebook.intro', {
-      url: "/intro",
-      templateUrl: 'views/rulebook/introduction.html',
-      controller: 'AboutCtrl'
-    })
-    .state('rulebook.mission', {
-      url: "/mission",
-      templateUrl: 'views/rulebook/mission.html',
-      controller: 'AboutCtrl'
+      url: "/rulebook/:id",
+      templateUrl: 'views/rulebook.html',
+      controller: 'RulebookCtrl',
+      resolve: {
+        pageData: function($stateParams, PageService) {
+          return PageService.find("rulebook", $stateParams.id);
+        },
+      }
     })
     .state('rest-api-v1', {
       url: "/rest-api-v1/:id",
@@ -61,7 +57,17 @@ angular
       controller: 'RestAPIv1Ctrl',
       resolve: {
         pageData: function($stateParams, PageService) {
-          return PageService.find($stateParams.id);
+          return PageService.find("rest-api-v1", $stateParams.id);
+        },
+      }
+    })
+    .state('realtime-api-v1', {
+      url: "/realtime-api-v1/:id",
+      templateUrl: "views/realtime-api-v1.html",
+      controller: 'RealtimeAPIv1Ctrl',
+      resolve: {
+        pageData: function($stateParams, PageService) {
+          return PageService.find("realtime-api-v1", $stateParams.id);
         },
       }
     })
