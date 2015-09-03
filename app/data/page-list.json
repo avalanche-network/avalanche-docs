@@ -24,6 +24,14 @@
   "rest-api-v1" :
     [
       {
+        "pageUrl" : "/rest-api-v1/rest-getting-started",
+        "slug"  : "rest-getting-started",
+        "title" : "Rest API v1",
+        "type"  : "page",
+        "content" : "data/rest-api-v1/rest-getting-started.md",
+        "tagline" : "Getting started guide"
+      },
+      {
         "pageUrl" : "/rest-api-v1/get-missions",
         "slug"  : "get-missions",
         "title" : "Mission List",
@@ -71,7 +79,7 @@
           "type" : "GET",
           "base" : "/missions/:slug"
         },
-        "implemented" : true,
+        "implemented" : false,
         "description" : "Returns detailed information about a mission, including lists of all agents, all tasks and recent activity.",
         "variables" : [
           {
