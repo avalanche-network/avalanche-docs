@@ -7,8 +7,9 @@
     <li ng-class="{ active: navActivePage('rulebook')}"><a ui-sref="rulebook({ id: 'intro'})">Rulebook</a></li>
     <li ng-hide="'false'"><a ui-sref="faq">FAQ</a></li>
     <li ng-hide="'false'"><a ui-sref="styleguide">Styleguide</a></li>
-    <li ng-hide="'true'"><a ui-sref="theme">Theme</a></li>
+    <li ng-class="{ active: navActivePage('theme')}"><a ui-sref="theme({ id: 'typography' })">Theme</a></li>
     <li ng-class="{ active: navActivePage('rest-api-v1')}"><a ui-sref="rest-api-v1({ id: 'get-missions' })">Restfull API v1 <span class="sr-only">(current)</span></a></li>
     <li ng-class="{ active: navActivePage('realtime-api-v1')}"><a ui-sref="realtime-api-v1({ id: 'realtime-mission-activity' })">Realtime API v1</a></li>
+    <li ng-hide="'false'"><a ui-sref="roadmap">Roadmap</a></li>
   </ul>
 </div>

@@ -2,8 +2,10 @@ angular.module('avalancheDocsApp')
 .service('PageService', [ '$rootScope', '$http',  function($rootScope, $http) {
   var pages = [];
   var current_page = {};
+  var current_group = "";
 
   this.find = function(group, page){
+    current_group = group;
     if( pages.length > 0) {
       searchForPage(group, page);
     } else {
@@ -20,6 +22,10 @@ angular.module('avalancheDocsApp')
 
   this.get = function(){
     return current_page;
+  }
+
+  this.getGroup = function(){
+    return current_group;
   }
 
   this.all = function(group){

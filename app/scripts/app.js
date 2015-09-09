@@ -71,5 +71,14 @@ angular
         },
       }
     })
-
-  }]);
+    .state('theme', {
+      url: "/theme/:id",
+      templateUrl: "views/page.html",
+      controller: 'PageGroupCtrl',
+      resolve: {
+        pageData: function($stateParams, PageService) {
+          return PageService.find("theme", $stateParams.id);
+        },
+      }
+    })
+  }])

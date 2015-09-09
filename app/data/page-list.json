@@ -255,5 +255,15 @@
         "tagline" : "Personal user notification feed",
         "implemented" : false
       }
+    ],
+    "theme" :
+    [
+      {
+        "pageUrl" : "/theme/typography",
+        "slug"  : "typography",
+        "title" : "Typography",
+        "tagline" : "headings, body text, lists, and more",
+        "content_html" : "data/theme/typography.html"
+      }
     ]
 }
