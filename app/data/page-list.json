@@ -77,9 +77,12 @@
         "title" : "Mission Details",
         "endpoint" : {
           "type" : "GET",
-          "base" : "/missions/:slug"
+          "base" : "/missions/:slug",
+          "object1" : "/missions/",
+          "id1"     : "slug",
+          "object2" : ""
         },
-        "implemented" : false,
+        "implemented" : true,
         "description" : "Returns detailed information about a mission, including lists of all agents, all tasks and recent activity.",
         "variables" : [
           {
@@ -109,6 +112,7 @@
           "type" : "POST",
           "base" : "/missions"
         },
+        "implemented" : true,
         "description" : "Creates a new mission on the system and returns it back. A user token is needed for this request.",
         "variables" : [
           {
@@ -140,6 +144,52 @@
           "type" : "DELETE",
           "base" : "/missions/:slug"
         }
+      },
+      {
+        "pageUrl" : "/rest-api-v1/get-mission-messages",
+        "slug"  : "get-mission-messages",
+        "title" : "Mission Messages",
+        "endpoint" : {
+          "type"    : "GET",
+          "base"    : "/missions/:slug/messages",
+          "object1" : "/missions/",
+          "id1"     : "slug",
+          "object2" : "/messages"
+        },
+        "implemented" : true,
+        "description" : "Returns a list of chat messages from a mission. By default, messages are ordered by date starting by the newest ones.",
+        "variables" : [
+          {
+            "name" : "slug",
+            "description" : "A shortname without spaces used as the mission identifier and url. This needs to be unique.",
+            "variable_type" : "string"
+          }
+        ]
+      },
+      {
+        "pageUrl" : "/rest-api-v1/post-mission-message",
+        "slug"  : "post-mission-message",
+        "title" : "Send Message",
+        "endpoint" : {
+          "type"    : "POST",
+          "base"    : "/missions/:slug/message/",
+          "object1" : "/missions/",
+          "id1"     : "slug",
+          "object2" : "/messages"
+        },
+        "implemented" : true,
+        "description" : "Creates a new message on the selected mission and broadcasts it to all mission agents.",
+        "variables" : [
+          {
+            "name" : "slug",
+            "description" : "A shortname without spaces used as the mission identifier and url. This needs to be unique.",
+            "variable_type" : "string"
+          },{
+            "name" : "content",
+            "description" : "Text string containing the message.",
+            "variable_type" : "string"
+          }
+        ]
       },
       {
         "pageUrl" : "/rest-api-v1/get-mission-agents",

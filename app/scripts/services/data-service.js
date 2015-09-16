@@ -8,7 +8,7 @@ angular.module('avalancheDocsApp')
     console.log(inputs);
     $http({
       method: 'GET',
-      url: 'http://localhost:5000/api' + url,
+      url: url,
       headers: { 'Authorization' : "Bearer " + token },
       params: inputs
     }).then(function(data, status, headers, config) {
@@ -37,7 +37,7 @@ angular.module('avalancheDocsApp')
     console.log(inputs);
     $http({
       method: 'POST',
-      url: 'http://localhost:5000/api' + url,
+      url: url,
       headers: { 'Authorization' : "Bearer " + token },
       params: inputs
     }).then(function(data, status, headers, config) {

@@ -2,13 +2,15 @@
   <div class="col-sm-9">
     <fieldset class="form-group">
       <label for="exampleInputEmail1">API Endpoint</label>
-      <input type="text" class="form-control" id="endpoint" placeholder="{{fullURL(pageData.endpoint.base)}}" disabled>
+      <input type="text" class="form-control" id="endpoint" placeholder="{{fullURL(pageData.endpoint)}}" disabled>
     </fieldset>
   </div>
   <div class="col-sm-3">
-    <fieldset class="form-group" style="margin-top: 35px;">
-      <button type="submit" class="btn btn-success btn-sm" ng-click="getData(pageData.endpoint.base)">Test</button>
+    <fieldset class="form-group" style="margin-top: 35px; margin-leg: -4px;">
+      <button ng-show="pageData.endpoint.type == 'GET'" type="submit" class="btn btn-success btn-sm" ng-click="getData(pageData.endpoint)">GET</button>
+      <button ng-show="pageData.endpoint.type == 'POST'" type="submit" class="btn btn-info btn-sm" ng-click="postData(pageData.endpoint)">POST</button>
       <button type="submit" class="btn btn-sm" ng-click="hideResponse()" ng-hide="hideResult">Hide</button>
     </fieldset>
   </div>
 </div>
+<p>{{pageData.variables.slug.value}}</p>

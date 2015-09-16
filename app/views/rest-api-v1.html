@@ -29,7 +29,7 @@
         <ng-include src="'views/helpers/under-construction.html'" ng-hide="pageData.implemented"></ng-include>
 
         <div ng-if="pageData.variables.length > 0">
-          <h5 class="top-spacer">Variables</h5>
+          <h5 class="top-spacer">Parameters</h5>
           <table class="table table-bordered top-spacer">
             <tr ng-repeat="variable in pageData.variables">
               <th>{{variable.name}}</th>

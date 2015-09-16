@@ -59,11 +59,13 @@ angular.module('avalancheDocsApp')
     DataService.getResponse()
 
     // API Calls
-    $scope.getData = function(url){
+    $scope.getData = function(endpoint){
+      var url = $scope.fullURL(endpoint);
       usSpinnerService.spin('spinner-1');
       DataService.get(url, $scope.processInputs(), $scope.tokens.selectedToken);
     }
-    $scope.postData = function(url){
+    $scope.postData = function(endpoint){
+      var url = $scope.fullURL(endpoint);
       usSpinnerService.spin('spinner-1');
       DataService.post(url, $scope.processInputs(), $scope.data, $scope.tokens.selectedToken);
     }
@@ -71,8 +73,10 @@ angular.module('avalancheDocsApp')
     $scope.processInputs = function(){
       var inputs = [];
       for (var i = 0; i < $scope.pageData.variables.length; i++) {
-        var field = $scope.pageData.variables[i].name;
-        inputs[field] = $scope.pageData.variables[i].value;
+        if($scope.pageData.variables[i].name != $scope.pageData.endpoint.id1){
+          var field = $scope.pageData.variables[i].name;
+          inputs[field] = $scope.pageData.variables[i].value;
+        }
       }
       return inputs;
     }
@@ -108,8 +112,22 @@ angular.module('avalancheDocsApp')
 
     // Misc Functions
 
-    $scope.fullURL = function(url){
-      return "http://localhost:5000/api" + url;
+    $scope.fullURL = function(endpoint){
+      if(endpoint.object1 == undefined){
+        return "http://localhost:5000/api" + endpoint.base;
+      } else {
+        var id1_value = ""
+        for (var i = 0; i < $scope.pageData.variables.length; i++) {
+          if($scope.pageData.variables[i].name == endpoint.id1){
+            id1_value = $scope.pageData.variables[i].value
+          }
+        }
+        if(id1_value == undefined || id1_value == ""){
+          id1_value = ":" + endpoint.id1;
+        }
+        return "http://localhost:5000/api" + endpoint.object1 + id1_value + endpoint.object2;
+      }
+
     }
 
     $scope.status = function(code) {
@@ -125,10 +143,16 @@ angular.module('avalancheDocsApp')
           info: "The request has been fulfilled and resulted in a new resource being created."
         };
       }
+      if(code == 302){
+        return {
+          code : "302 Found",
+          info: "The resource you are requesting has redirected you to another resource."
+        };
+      }
       if(code == 401){
         return {
           code : "401 Unauthorized",
-          info: ""
+          info: "The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing)."
         };
       }
       if(code == 422){
