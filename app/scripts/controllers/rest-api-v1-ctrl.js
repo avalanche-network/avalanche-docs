@@ -32,16 +32,17 @@ angular.module('avalancheDocsApp')
         return viewLocation === $location.path();
     };
 
-    $scope.token = $cookies.get('avalanche-docs-token');
-    if($scope.token == undefined) {
-      $scope.token = "none";
-      $scope.hideToken = true;
-    }
 
-    $scope.authorizeUser = function(){
+
+    $scope.authorizeApplication = function(){
       console.log($location.url());
       $cookies.put('avalanche_docs_before_login_page', $location.url());
       $window.location.href = 'http://localhost:5000/oauth/authorize?client_id=d514f58c234d69ce1405f00dbef842bd785c09201b35a746d87306f5e69fd02b&redirect_uri=http://localhost:9000/&response_type=code';
+    }
+
+    $scope.authorizeUser = function(){
+      console.log("Authorizing user...");
+      OAuthService.authorizeUser($scope.login.email, $scope.login.password);
     }
 
 
@@ -49,6 +50,7 @@ angular.module('avalancheDocsApp')
     $scope.response = {};
     $scope.hideResult = true;
     $scope.tokens = { availableOptions : [], selectedOption: []};
+    $scope.login = { email : "", password: ""};
     $scope.tokens.availableOptions[0] = 'none';
     $scope.tokens.selectedToken = $scope.tokens.availableOptions[0];
     $scope.data = {}
@@ -67,7 +69,7 @@ angular.module('avalancheDocsApp')
     $scope.postData = function(endpoint){
       var url = $scope.fullURL(endpoint);
       usSpinnerService.spin('spinner-1');
-      DataService.post(url, $scope.processInputs(), $scope.data, $scope.tokens.selectedToken);
+      DataService.post(url, $scope.processInputs(), $scope.tokens.selectedToken);
     }
 
     $scope.processInputs = function(){
@@ -101,12 +103,12 @@ angular.module('avalancheDocsApp')
     $rootScope.$on('auth:success', function() {
       if(!$scope.$$phase) {
         $scope.$apply(function(){
-          $scope.token[1] = OAuthService.getToken();
-          $scope.selectedToken = $scope.tokens.availableOptions[1];
+          $scope.tokens.availableOptions[1] = OAuthService.getToken();
+          $scope.tokens.selectedToken = $scope.tokens.availableOptions[1];
         });
       } else {
-          $scope.token[1] = OAuthService.getToken();
-          $scope.selectedToken = $scope.tokens.availableOptions[1];
+        $scope.tokens.availableOptions[1] = OAuthService.getToken();
+        $scope.tokens.selectedToken = $scope.tokens.availableOptions[1];
       }
     });
 

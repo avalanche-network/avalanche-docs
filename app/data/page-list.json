@@ -146,6 +146,48 @@
         }
       },
       {
+        "pageUrl" : "/rest-api-v1/get-mission-activities",
+        "slug"  : "get-mission-activities",
+        "title" : "Mission Activities",
+        "endpoint" : {
+          "type"    : "GET",
+          "base"    : "/missions/:slug/activities",
+          "object1" : "/missions/",
+          "id1"     : "slug",
+          "object2" : "/activities"
+        },
+        "implemented" : true,
+        "description" : "Returns a list of activities that happened on the mission. Activities include all messages sent, mission details edits, new agents and task related activities.",
+        "variables" : [
+          {
+            "name" : "slug",
+            "description" : "A shortname without spaces used as the mission identifier and url. This needs to be unique.",
+            "variable_type" : "string"
+          }
+        ]
+      },
+      {
+        "pageUrl" : "/rest-api-v1/get-activity",
+        "slug"  : "get-activity",
+        "title" : "Find Activity",
+        "endpoint" : {
+          "type"    : "GET",
+          "base"    : "/activities/:id",
+          "object1" : "/activities/",
+          "id1"     : "id",
+          "object2" : ""
+        },
+        "implemented" : true,
+        "description" : "Search for a specific activity by its ID.",
+        "variables" : [
+          {
+            "name" : "id",
+            "description" : "Unique ID number of the activity",
+            "variable_type" : "string"
+          }
+        ]
+      },
+      {
         "pageUrl" : "/rest-api-v1/get-mission-messages",
         "slug"  : "get-mission-messages",
         "title" : "Mission Messages",
@@ -167,12 +209,12 @@
         ]
       },
       {
-        "pageUrl" : "/rest-api-v1/post-mission-message",
-        "slug"  : "post-mission-message",
+        "pageUrl" : "/rest-api-v1/post-mission-messages",
+        "slug"  : "post-mission-messages",
         "title" : "Send Message",
         "endpoint" : {
           "type"    : "POST",
-          "base"    : "/missions/:slug/message/",
+          "base"    : "/missions/:slug/messages/",
           "object1" : "/missions/",
           "id1"     : "slug",
           "object2" : "/messages"

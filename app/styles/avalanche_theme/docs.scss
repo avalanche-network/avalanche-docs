@@ -122,7 +122,7 @@
 
 // Hacks
 
-.api-endpoint > .label { margin-right: 6px;}
+.api-endpoint .label { margin-right: 6px; padding-top: 3px; }
 
 ::-webkit-scrollbar {
     width: 4px;

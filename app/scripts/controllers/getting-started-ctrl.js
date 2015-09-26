@@ -10,7 +10,7 @@
 angular.module('avalancheDocsApp')
   .controller('GettingStartedCtrl', ['$scope', '$cookies', '$sanitize', 'OAuthService', '$location', function ($scope, $cookies, $sanitize, OAuthService, $location) {
 
-    OAuthService.lookForAuthCode();
+    OAuthService.lookForApplicationAuthCode();
 
     var before_login_page = $cookies.get('avalanche_docs_before_login_page');
     if(before_login_page != undefined) {

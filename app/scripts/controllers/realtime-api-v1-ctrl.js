@@ -32,13 +32,9 @@ angular.module('avalancheDocsApp')
         return viewLocation === $location.path();
     };
 
-    $scope.token = $cookies.get('avalanche-docs-token');
-    if($scope.token == undefined) {
-      $scope.token = "none";
-      $scope.hideToken = true;
-    }
 
-    $scope.authorizeUser = function(){
+
+    $scope.authorizeApplication = function(){
       console.log($location.url());
       $cookies.put('avalanche_docs_before_login_page', $location.url());
       $window.location.href = 'http://localhost:5000/oauth/authorize?client_id=d514f58c234d69ce1405f00dbef842bd785c09201b35a746d87306f5e69fd02b&redirect_uri=http://localhost:9000/&response_type=code';
@@ -53,8 +49,15 @@ angular.module('avalancheDocsApp')
     $scope.tokens.selectedToken = $scope.tokens.availableOptions[0];
     $scope.data = {}
     if(OAuthService.getToken() != "" && OAuthService.getToken() != undefined){
-      $scope.tokens.availableOptions[1] = OAuthService.getToken();
-      $scope.tokens.selectedToken = $scope.tokens.availableOptions[1];
+      if(!$scope.$$phase) {
+        $scope.$apply(function(){
+          $scope.tokens.availableOptions[1] = OAuthService.getToken();
+          $scope.tokens.selectedToken = $scope.tokens.availableOptions[1];
+        });
+      } else {
+        $scope.tokens.availableOptions[1] = OAuthService.getToken();
+        $scope.tokens.selectedToken = $scope.tokens.availableOptions[1];
+      }
     }
     DataService.getResponse()
 

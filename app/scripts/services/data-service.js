@@ -6,6 +6,7 @@ angular.module('avalancheDocsApp')
   this.get = function(url, inputs, token){
     console.log("Requesting data from " + url);
     console.log(inputs);
+    console.log(token);
     $http({
       method: 'GET',
       url: url,
@@ -35,6 +36,7 @@ angular.module('avalancheDocsApp')
   this.post = function(url, inputs, token){
     console.log("Posting data to " + url);
     console.log(inputs);
+    console.log(token);
     $http({
       method: 'POST',
       url: url,

@@ -5,11 +5,10 @@
       <ul class="nav nav-sidebar">
         <li ng-repeat="page in pageList" ng-class="{ active: isActive(page.pageUrl)}">
           <a ui-sref="rest-api-v1({ id: page.slug })">
-            <small ng-hide="page.type == 'page'" class="api-endpoint">
-              <span ng-class="callTypeBadge(page.endpoint.type)">{{page.endpoint.type}}</span><samp>{{page.endpoint.base}}</samp>
-            </small>
-            <p  ng-hide="page.type == 'page'" class="endpoint-description"><i>{{page.title}}</i></p>
-            <h5 ng-show="page.type == 'page'">{{page.title}}</h5>
+            <b>{{page.title}}</b><br>
+            <p ng-hide="page.type == 'page'" class="api-endpoint">
+              <small><span ng-class="callTypeBadge(page.endpoint.type)" >{{page.endpoint.type}}</span><samp>{{page.endpoint.base}}</samp></small>
+            </p>
             <p  ng-show="page.type == 'page'" style="margin-bottom: 10px;"><i>{{page.tagline}}</i></p>
           </a>
         </li>
@@ -19,7 +18,7 @@
     <div class="col-sm-5 col-sm-offset-7 col-md-7 col-md-offset-5 main">
       <div class="api-endpoint" ng-hide="pageData.type == 'page'">
         <h2 style="margin-bottom: 0px;">{{pageData.title}}</h2>
-        <small class="api-endpoint"><span ng-class="callTypeBadge(pageData.endpoint.type)">{{pageData.endpoint.type}}</span> {{pageData.endpoint.base}}</small>
+        <small class="api-endpoint"><span ng-class="callTypeBadge(pageData.endpoint.type)">{{pageData.endpoint.type}}</span> <samp>{{pageData.endpoint.base}}</samp></small>
         <hr>
 
         <div ng-if="pageData.description != undefined">
